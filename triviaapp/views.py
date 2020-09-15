@@ -38,47 +38,12 @@ def question1(request, pk=None):
 
 
 
-def question11(request):
-    if request.method=='GET':
-        return render(request,'triviaapp/question1.html',{'form':TodoForm()})
-    else:
-        try:
-            trivia=Trivia()
-            form=TriviaForm(request.POST)
-            newtrivia=form.save(commit=False)
-            newtrivia.save()
-            return redirect('question2')
-        except ValueError:
-            return render(request,'triviaapp/question1.html',{'form':TodoForm,'error':'bad data input'})
-
-
-def question2(request,todo_pk):
-    todo=get_object_or_404(Trivia,pk=trivia_pk)
-    if request.method=='POST':
-        todo.datecompleted=timezone.now()
-        todo.save()
-        return redirect('currenttodo')
-
 def summary(request,todo_pk):
     todo=get_object_or_404(Trivia,pk=trivia_pk)
     if request.method=='POST':
         todo.datecompleted=timezone.now()
         todo.save()
         return redirect('currenttodo')
-
-
-def viewtodo(request,todo_pk):
-    todo=get_object_or_404(Todo,pk=todo_pk,user=request.user)
-    if request.method=='GET':
-        form=TodoForm(instance=todo)
-        return render(request,'todoapp/viewtodo.html',{'todo':todo,'form':form})
-    else:
-        try:
-            form=TodoForm(request.POST,instance=todo)
-            form.save()
-            return redirect('currenttodo')
-        except ValueError:
-            return render(request,'todoapp/viewtodo.html',{'todo':todo,'form':form,'error':'bad data input'})
 
 
 def history(request):

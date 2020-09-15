@@ -1,0 +1,76 @@
+
+{% extends 'triviaapp/base.html' %}
+
+
+
+{% block content %}
+
+
+<div class="">
+
+{% if last_id == trivia.id %}
+    <form  action="{% url 'summary'  %}"   method="POST">
+{% else %}
+
+<form  action="{% url 'question' pk=pk  %}"   method="POST">
+  {% endif %}
+
+{% csrf_token %}
+<div class="container  text-center">
+  <br>
+  <h1 class="text-center">{{trivia.question}}</h1>
+  <br>
+
+  {% if trivia.type == 1 %}
+    {% for option in trivia.options.all %}
+      <h4> <input type="radio" name="option" id ="{{ option.id }}" value="{{option.id}}"> {{option}}</h4>
+    {% endfor %}
+
+
+    {% else %}
+      {% for option in trivia.options.all %}
+        <h4> <input type="checkbox" name="option" id="option_{{option.id}}" value="{{option.id}}">{{option}}</h4>
+      {% endfor %}
+    {% endif %}
+{% csrf_token %}
+</div>
+  <br>
+
+    {% if last_id == trivia.id %}
+
+  <input type="submit" class="button btn btn-primary" name="Finish" value="Finish">
+{% else %}
+<input type="submit" class="button btn btn-primary" name="NEXT" value="NEXT">
+  {% endif %}
+{% csrf_token %}
+  </form>
+
+</div>
+<br>
+{% endblock %}
+
+
+<!-- <form class="" action="{% url 'question1' %}">
+
+<h1 class="text-center">question!</h1>
+
+
+<div class="container ">
+
+{% if trivia.type == 1 %}
+  {% for option in trivia.options.all %}
+    <h4> <input type="radio" name="choice" value="{{option}}"> {{option}}</h4>
+  {% endfor %}
+
+
+
+  {% else %}
+    {% for option in trivia.options.all %}
+      <h4> <input type="checkbox" name="option" value="{{option}}">{{option}}</h4>
+    {% endfor %}
+{% endif %}
+
+<br>
+<button type="submit" name="button" value="Next ">submit and Next </button>
+
+  </form> -->

@@ -3,8 +3,14 @@
 {% block content %}
 <h1>History</h1>
 
+{% for answer in answers %}
+<h4> player name : {{answer.player.name}}</h4>
+<br>
 
+  Question : {{answer.question.question}}
+  <br>
+  Your Answer: {{answer.get_player_answer}}
+<br>
 
-
-
+{% endfor %}
 {% endblock %}

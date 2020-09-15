@@ -22,7 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.getname,name='getname'),
     path('playgame',views.playgame,name='playgame'),
-    re_path('question1/(?P<pk>\d+)/$',views.question1,name='question1'),
+    # re_path('question1',views.question1,name='question1'),
+    re_path('question/(?P<pk>\d+)/$',views.question,name='question'),
     path('summary',views.summary,name='summary'),
     path('history',views.history,name='history'),
 

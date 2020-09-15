@@ -1,14 +1,15 @@
 from django.shortcuts import render,get_object_or_404
-from .models import Trivia,Option,Player
+from .models import Trivia,Option,Player, Answersheet
 from django.utils import timezone
-from .forms import TriviaForm,OptionForm,PlayerForm
+from .forms import TriviaForm,OptionForm,PlayerForm,AnswersheetForm
+
 
 
 def playgame(request):
     pk = Trivia.objects.first().pk
     # import pdb; pdb.set_trace();
     player=Player.objects.all()
-    return render(request,'triviaapp/question1.html', {'pk': pk,'form':'PlayerForm'})
+    return render(request,'triviaapp/question.html', {'pk': pk,'form':'PlayerForm'})
 
 def getname(request,pk=None):
     if request.method=='GET':
@@ -17,37 +18,57 @@ def getname(request,pk=None):
         try:
             form=PlayerForm(request.POST)
             if form.is_valid():
+                username=form.cleaned_data['name']
                 form.save()
                 # pk = Player.objects.first().pk
                 # if pk:
                 #     player = Player.objects.get(pk=pk)
                 # else:
                 #     Player = Player.objects.first()
-                # request.session['player'] = trivia.player
-            return render(request,'triviaapp/playgame.html',{'form':PlayerForm})
+                request.session['name'] = username
+            pk = Trivia.objects.first().pk
+            return render(request,'triviaapp/playgame.html',{ "pk": pk})
 
         except ValueError:
             return render(request,'triviaapp/getname.html',{'form':TriviaForm,'error':'bad data input'})
 
 
-def question1(request, pk=None):
+def question(request,pk=None):
+    if request.POST:
+        print("*"*100, pk)
+        print(request.POST)
+        question = Trivia.objects.get(pk=pk)
+        player, player_created = Player.objects.get_or_create(name__icontains=request.session['name'])
+        answers = Option.objects.filter(id__in=request.POST.get('option'))
+        answer, created = Answersheet.objects.get_or_create(
+            question=question,
+            player=player
+        )
+        # answer.playeranswer.clear()
+        answer.playeranswer.add(*request.POST.getlist('option'))
+        answer.save()
+    last_trivia=Trivia.objects.last()
     if pk:
-        trivia = Trivia.objects.get(pk='1')
+        trivia = Trivia.objects.get(pk=pk)
     else:
         trivia = Trivia.objects.first()
-    return render(request,'triviaapp/question1.html', {'trivia': trivia})
-
-
-def summary(request,todo_pk):
-    todo=get_object_or_404(Trivia,pk=trivia_pk)
-    if request.method=='POST':
-        todo.datecompleted=timezone.now()
-        todo.save()
-        return redirect('currenttodo')
+    # if pk==2:
+    #     player = Player.objects.get(name__iexact=request.session['name'])
+    #     answers = Answersheet.objects.filter(player=player)
+    #     print("ANSWERS", answers.count())
+    #     return render(request,'triviaapp/summary.html', {"answers": answers})
+    return render(request,'triviaapp/question.html', {'trivia': trivia,'last_id':last_trivia.id, "pk": 2})
 
 
 def history(request):
-    pass
+    answers = Answersheet.objects.all()
+    return render(request,'triviaapp/history.html', {"answers": answers})
+
 
 def summary(request):
-    pass
+    player = Player.objects.get(name__iexact=request.session['name'])
+    answers = Answersheet.objects.filter(player=player)
+    print("ANSERRRRrr", answers.count())
+
+
+    return render(request,'triviaapp/summary.html', {"answers": answers})

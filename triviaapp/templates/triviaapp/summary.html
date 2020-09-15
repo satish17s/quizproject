@@ -3,7 +3,30 @@
 {% block content %}
 
 <h1>Summary</h1>
+{% for answer in answers %}
+Hi {{answer.player.name}}
 
 
+  Question : {{answer.question.question}}
+  <br>
+  Your Answer: {{answer.get_player_answer}}
+<br>
+
+{% endfor %}
+<form class="" action=" " method="POST">
+
+{% csrf_token %}
+
+
+<button type="submit"  class="buttoncreate finish" name="FINISH">
+  <a href="{% url 'getname'  %}">FINISH</a></button>
+
+<button type="submit"  class="buttoncreate history" name="HISTORY ">
+  <a href="{% url 'history'  %}">HISTORY</a> </button>
+
+{% csrf_token %}
+</form>
+
+{% csrf_token %}
 
 {% endblock %}

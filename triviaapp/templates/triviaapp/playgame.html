@@ -1,6 +1,12 @@
 
 
 
-weclome:{{ player.name }}
 
-  <a href="{% url 'question1' pk=pk %}" > Start The Game- {{pk}}</a>
+  {% block content %}
+  <div class="container">
+
+  <a href="{% url 'question' pk=pk  %}" > Start The Game</a>
+
+          </div>
+
+  {% endblock %}

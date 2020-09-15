@@ -23,7 +23,6 @@ class PlayerForm(forms.ModelForm):
 
 
 class AnswersheetForm(forms.ModelForm):
-    name = forms.CharField(required = True)
     class Meta:
         model=models.Answersheet
         fields='__all__'

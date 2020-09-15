@@ -5,12 +5,8 @@
 
 <form class="" action="{% url 'question2' %}">
 <br>
-<h1 class="text-center">question 1</h1>
+<h1 class="text-center">question!</h1>
 <br>
-<h3>Who is the best cricketer in the world?</h3>
-
-<h4> Options: </h4>
-
 
 <div class="container  text-center">
 
@@ -26,10 +22,6 @@
       <h4> <input type="checkbox" name="option" value="{{option}}">{{option}}</h4>
     {% endfor %}
 {% endif %}
-    <!-- <h4> <input type="radio" name="choice" value="Sachin Tendulkar"> A) Sachin Tendulkar</h4>
-    <h4> <input type="radio" name="choice" value="Virat Kolli"> B) Virat Kolli</h4>
-    <h4> <input type="radio" name="choice" value="Adam Gilchirst"> C) Adam Gilchirst</h4>
-    <h4> <input type="radio" name="choice" value="Jacques Kallis"> D) Jacques Kallis</h4> -->
 
 <br>
     <input type="submit" class="button button2" name="" value="submit answer">

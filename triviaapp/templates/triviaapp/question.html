@@ -18,7 +18,9 @@
 {% csrf_token %}
 <div class="container  text-center">
   <br>
+  <hr>
   <h1 class="text-center">{{trivia.question}}</h1>
+  <hr>
   <br>
 
   {% if trivia.type == 1 %}

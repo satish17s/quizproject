@@ -17,12 +17,14 @@
 <body>
   <header>
     <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand" href="#">Trivia App</a>
+      <div class="container">
+      <a class="navbar-brand" href="{% url 'getname'  %}">Trivia App</a>
+        </div>
     </nav>
 
   </header>
 
-  <div class=" container">
+  <div class=" container text-center">
     {% block content %}
 
 

@@ -2,14 +2,16 @@
 
 {% block content %}
 
+<hr>
 <h1>Summary</h1>
+<hr>
 {% for answer in answers %}
-Hi {{answer.player.name}}
+<h2>Hi {{answer.player.name}} </h2>
+<hr>
 
-
-  Question : {{answer.question.question}}
+<h3> Question : {{answer.question.question}}</h3>
   <br>
-  Your Answer: {{answer.get_player_answer}}
+<h3>Your Answer: {{answer.get_player_answer}} </h3>
 <br>
 
 {% endfor %}
@@ -18,10 +20,10 @@ Hi {{answer.player.name}}
 {% csrf_token %}
 
 
-<button type="submit"  class="buttoncreate finish" name="FINISH">
+<button type="submit"  name="FINISH">
   <a href="{% url 'getname'  %}">FINISH</a></button>
 
-<button type="submit"  class="buttoncreate history" name="HISTORY ">
+<button type="submit"  name="HISTORY ">
   <a href="{% url 'history'  %}">HISTORY</a> </button>
 
 {% csrf_token %}

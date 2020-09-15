@@ -1,14 +1,17 @@
 {% extends 'triviaapp/base.html' %}
 
 {% block content %}
-
+<br>
+<hr>
 <h1>Enter Your Name!</h1>
 <div class="container">
            <form method="post" enctype="multipart/form-data">
                {% csrf_token %}
+               <br>
                {{ form.as_p }}
-               <button type="submit">Submit</button>
+            
+               <button class="btn btn-primary" type="submit">Submit</button>
            </form>
         </div>
-
+<hr>
 {% endblock %}

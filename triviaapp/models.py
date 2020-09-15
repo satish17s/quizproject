@@ -11,8 +11,8 @@ class Trivia(models.Model):
     type = models.IntegerField(choices=STATUS_CHOICES, default=1)
     options= models.ManyToManyField('Option',related_name='trivia_options')
     answer = models.ManyToManyField('Option',related_name='trivia_answer', blank=True)
-    player = models.ForeignKey('Player',on_delete=models.CASCADE)
-    date_completed = models.DateTimeField(auto_now_add=True)
+    # player = models.ForeignKey('Player',on_delete=models.CASCADE)
+    date_completed = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.question

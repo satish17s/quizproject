@@ -10,9 +10,8 @@ class Trivia(models.Model):
     question = models.CharField(max_length = 250)
     type = models.IntegerField(choices=STATUS_CHOICES, default=1)
     options= models.ManyToManyField('Option',related_name='trivia_options')
-    answer = models.ManyToManyField('Option',related_name='trivia_answer', blank=True)
-    # player = models.ForeignKey('Player',on_delete=models.CASCADE)
-    date_completed = models.DateTimeField(auto_now=True)
+    correctanswer = models.ManyToManyField('Option',related_name='trivia_answer', blank=True)
+
 
     def __str__(self):
         return self.question
@@ -29,3 +28,12 @@ class Player(models.Model):
 
      def __str__(self):
          return self.name
+
+class Answersheet(models.Model):
+     question = models.ForeignKey(Player, on_delete=models.CASCADE,related_name='player_question')
+     player=models.ForeignKey(Player, on_delete=models.CASCADE,related_name='player_name')
+     playeranswer=models.ManyToManyField('Option',related_name='player_answer', blank=True)
+     date_completed = models.DateTimeField(auto_now=True)
+
+     def __str__(self):
+         return self.player

@@ -1,10 +1,6 @@
 
 
 
-{{ player.name }}
+weclome:{{ player.name }}
 
-{% if pk %}
-  <a href="{% url 'question1' pk=pk %}" > Start The Game- {{pk}}</a>
-{% else %}
-<a href="{% url 'question1'%}" > Start The Game</a>
-{% endif %}
+  <a href="{% url 'question1' pk='pk' %}" > Start The Game- {{pk}}</a>

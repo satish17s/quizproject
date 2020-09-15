@@ -10,7 +10,7 @@ def playgame(request):
     player=Player.objects.all()
     return render(request,'triviaapp/question1.html', {'pk': pk,'form':'PlayerForm'})
 
-def getname(request):
+def getname(request,pk=None):
     if request.method=='GET':
         return render(request,'triviaapp/getname.html',{'form':PlayerForm()})
     else:
@@ -32,7 +32,7 @@ def getname(request):
 
 def question1(request, pk=None):
     if pk:
-        trivia = Trivia.objects.get(pk=pk)
+        trivia = Trivia.objects.get(pk='1')
     else:
         trivia = Trivia.objects.first()
     return render(request,'triviaapp/question1.html', {'trivia': trivia})

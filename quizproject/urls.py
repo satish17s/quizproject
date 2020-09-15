@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,re_path
 from triviaapp import views
 from django.conf.urls.static import static
 
@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.getname,name='getname'),
     path('playgame',views.playgame,name='playgame'),
-    path('question1/(?P<pk>\d+)/$',views.question1,name='question1'),
+    re_path('question1/(?P<pk>\d+)/$',views.question1,name='question1'),
     path('summary',views.summary,name='summary'),
     path('history',views.history,name='history'),
 

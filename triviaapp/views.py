@@ -48,3 +48,6 @@ def summary(request,todo_pk):
 
 def history(request):
     pass
+
+def summary(request):
+    pass

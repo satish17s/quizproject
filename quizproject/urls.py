@@ -24,7 +24,6 @@ urlpatterns = [
     path('playgame',views.playgame,name='playgame'),
     path('question1/$',views.question1,name='question1'),
     path('question1/(?P<pk>\d+)/$',views.question1,name='question1'),
-    path('question2',views.question2,name='question2'),
     path('summary',views.summary,name='summary'),
     path('history',views.history,name='history'),
 
